@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%=title%></title>
+    <link rel="stylesheet" href="/styles/base.css">
+    <link rel="stylesheet" href="/styles/validation.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <%if(title==="Login"){%>
+            <div class="login_container">
+                <div class="form-header">
+                    <h2>Welcome Back</h2>
+                    <p>Sign in to your account to continue</p>
+                </div>
+                <form id="login-form">
+                    <div class="input_group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                    </div>
+                    <div class="input_group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" name="password" placeholder="Enter your password" required>
+                    </div>
+                    <button class="verification-btn" id="login-btn" type="submit">Sign In</button>
+                    <div class="change_link">
+                        <p>Don't have an account? <a href="/signup">Sign Up</a></p>
+                    </div>
+                </form>
+            </div>
+        <%} else if(title==="Signup"){%>
+            <div class="signup_container">
+                <div class="form-header">
+                    <h2>Create Account</h2>
+                    <p>Join us to start tracking your finances</p>
+                </div>
+                <form id="signup-form">
+                    <div class="input_group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" name="name" placeholder="Enter your full name" required>
+                    </div>
+                    <div class="input_group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                    </div>
+                    <div class="input_group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" name="password" placeholder="Create a password" required>
+                    </div>
+                    <div class="input_group">
+                        <label for="confirm-password">Confirm Password</label>
+                        <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirm your password" required>
+                    </div>
+                    <button class="verification-btn" id="signup-btn" type="submit">Create Account</button>
+                    <div class="change_link">
+                        <p>Already have an account? <a href="/login">Sign In</a></p>
+                    </div>
+                </form>
+            </div>
+        <%}%>
+        <div class="error-msg" id="error-msg"></div>
+    </div>
+    
+    <script type="module" src="./js/verification.js"></script>
+</body>
+</html>
