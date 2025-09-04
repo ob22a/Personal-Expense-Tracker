@@ -8,6 +8,7 @@ export async function getMonthlySummary(ownerId){
                 WHERE owner_id = $1
             `,[ownerId]
         );
+        console.log(res.rows);
         return res.rows;
     } catch (err) {
         console.error('Error fetching monthly summary:', err);

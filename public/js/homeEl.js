@@ -2,7 +2,7 @@ import { goalEvents } from "./goal.js";
 import { transactionEvents } from "./transaction.js";
 import { reportsEvents } from './reports.js';
 
-export async function allEvents(accessToken){
+export async function allEvents(){
     // Navigation functionality
     const transactionBtn = document.getElementById('transaction-btn');
     const goalsBtn = document.getElementById('goals-btn');
@@ -23,9 +23,9 @@ export async function allEvents(accessToken){
         transactionBtn.classList.remove('active');
     });
 
-    goalEvents(accessToken);
-    transactionEvents(accessToken);
-    reportsEvents(accessToken);
+    goalEvents();
+    transactionEvents();
+    reportsEvents();
     
     // Toggle monthly summary visibility when button is clicked
     const showMonthlySummaryBtn = document.getElementById('show-monthly-summary-btn');

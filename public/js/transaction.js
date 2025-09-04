@@ -4,7 +4,7 @@ const txPageLimit = 10;
 let txHasMore = false;
 
 // Load and display transactions (paginated)
-async function loadTransactions(accessToken) {
+async function loadTransactions() {
     const sortBy = document.getElementById('sort-by').value;
     const sortOrder = document.getElementById('sort-order').value;
     try {
@@ -39,7 +39,7 @@ function editTransaction(id, name, amount, detail) {
 }
 
 // Delete transaction functionality
-async function deleteTransaction(id,accessToken) {
+async function deleteTransaction(id) {
     if (confirm('Are you sure you want to delete this transaction?')) {
         try {
             const response = await fetch(`/api/transactions/${id}`, {
@@ -89,7 +89,7 @@ function displayTransactions(transactions) {
     transactionsList.innerHTML = transactionsHTML;
 }
 
-export function transactionEvents(accessToken){
+export function transactionEvents(){
     // Transaction functionality
     const addTransactionBtn = document.getElementById('add-transaction-btn');
     const showTransactionsBtn = document.getElementById('show-transactions-btn');
@@ -107,7 +107,7 @@ export function transactionEvents(accessToken){
         showTransactions.classList.remove('hidden');
         addTransactionForm.classList.add('hidden');
         txCurrentPage = 1;
-        loadTransactions(accessToken);
+        loadTransactions();
     });
 
     cancelTransactionBtn.addEventListener('click', () => {
@@ -150,7 +150,7 @@ export function transactionEvents(accessToken){
     // Sorting functionality
     document.getElementById('apply-sort').addEventListener('click', () => {
         txCurrentPage = 1;
-        loadTransactions(accessToken);
+        loadTransactions();
     });
 
     // Pagination controls
@@ -161,13 +161,13 @@ export function transactionEvents(accessToken){
         prevBtn.addEventListener('click', () => {
             if (txCurrentPage > 1) {
                 txCurrentPage -= 1;
-                loadTransactions(accessToken);
+                loadTransactions();
             }
         });
         nextBtn.addEventListener('click', () => {
             if (txHasMore) {
                 txCurrentPage += 1;
-                loadTransactions(accessToken);
+                loadTransactions();
             }
         });
     }
@@ -204,7 +204,7 @@ export function transactionEvents(accessToken){
             if (response.ok) {
                 alert('Transaction updated successfully!');
                 document.getElementById('edit-transaction-modal').classList.add('hidden');
-                loadTransactions(accessToken);
+                loadTransactions();
             } else {
                 const error = await response.json();
                 alert('Error: ' + error.message);

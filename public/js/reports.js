@@ -1,4 +1,4 @@
-export function reportsEvents(accessToken) {
+export function reportsEvents() {
 	const showMonthlySummaryBtn = document.getElementById('show-monthly-summary-btn');
 	const monthlySummaryContainer = document.getElementById('monthly-summary');
 
@@ -8,7 +8,7 @@ export function reportsEvents(accessToken) {
 		showMonthlySummaryBtn.disabled = true;
 		showMonthlySummaryBtn.textContent = 'Loading…';
 		try {
-			const resp = await fetch(`/api/reports/`,{
+			const resp = await fetch(`/api/goals/reports/monthly-summary`,{
 				headers: { 
 					'Content-Type': 'application/json',
 					'authorization': `Bearer ${accessToken}`

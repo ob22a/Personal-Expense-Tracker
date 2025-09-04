@@ -22,22 +22,29 @@ async function updateCurrentSaved(goalId,amount){
     }
 }
 
+
 export async function addSavingLog(goalId, amount, note=null){
+    const client = await pool.connect();
     try{
-        const res = await pool.query(
-            `
-                INSERT INTO goal_saving_log (goal_id, amount_saved, note)
-                VALUES ($1, $2, $3)
-                RETURNING *
-            `,[goalId, amount, note]
+        await client.query('BEGIN');
+        const res = await client.query(
+            `INSERT INTO goal_saving_log (goal_id, amount_saved, note)
+            VALUES ($1, $2, $3) RETURNING *`,
+            [goalId, amount, note]
         );
-        await updateCurrentSaved(goalId, amount);
+        await client.query(
+            `UPDATE goals SET current_saved = current_saved + $1 WHERE goal_id=$2`,
+            [amount, goalId]
+        );
+        await client.query('COMMIT');
         return res.rows[0];
-    } catch(err){
-        console.error("Error adding saving log:", err);
-        throw err;
-    }
-}
+        } catch(err){
+            await client.query('ROLLBACK');
+            throw err;
+        } finally {
+        client.release();
+        }
+  };
 
 export async function getSavingLogs(goalId){
     try{

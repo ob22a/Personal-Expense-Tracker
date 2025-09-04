@@ -10,8 +10,8 @@ async function loadGoals() {
         });
 
         if (response.ok) {
-            const goals = await response.json();
-            displayGoals(goals);
+            const data = await response.json();
+            displayGoals(data.goals);
         } else {
             console.error('Error loading goals');
         }
@@ -27,7 +27,7 @@ function displayGoals(goals) {
         goalsList.innerHTML = '<p class="no-data">No goals found.</p>';
         return;
     }
-
+    //console.log(goals);
     const goalsHTML = goals.map(goal => `
         <div class="goal-item" data-id="${goal.goal_id}">
             <div class="goal-info">
@@ -89,12 +89,12 @@ async function deleteGoal(id) {
 // Show goal logs functionality
 export async function showGoalLogs(goalId) {
     try {
-        const response = await fetch(`/api/goalLog/${goalId}`, {
+        const response = await fetch(`/api/goals/goalLog/${goalId}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
                 'authorization': 'Bearer ' + accessToken
-            }
+            },
         });
 
         if (response.ok) {
@@ -162,7 +162,7 @@ export function goalEvents(){
         const goalData = {
             name: document.getElementById('goal-name').value,
             totalAmount: parseFloat(document.getElementById('goal-amount').value),
-            freq: document.getElementById('goal-freq').value,
+            freq: document.getElementById('goal-freq').value.toLowerCase(),
             goalDeadline: document.getElementById('goal-deadline').value,
         };
 
@@ -214,13 +214,13 @@ export function goalEvents(){
         const note = document.getElementById('saving-note').value;
 
         try {
-            const response = await fetch(`/api/goalLog/${goalId}`, {
+            const response = await fetch(`/api/goals/goalLog`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                     'authorization': 'Bearer ' + accessToken
                 },
-                body: JSON.stringify({ amount, note })
+                body: JSON.stringify({ amount, note,goalId })
             });
 
             if (response.ok) {

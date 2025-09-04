@@ -9,10 +9,10 @@
 import pool from './db.js';
 
 function freqValidator(freq){
-    const validFreq = ['daily','weekly','monthly','yearly'];
+    const validFreq = ['daily','weekly','monthly'];
     if(!validFreq.includes(freq)){
+        console.warn(`Invalid frequency provided ${freq}. Defaulting to 'daily'.`);
         freq='daily';
-        console.warn("Invalid frequency provided. Defaulting to 'daily'.");
     }
     return freq;
 }
@@ -77,7 +77,8 @@ export async function getGoals(userId){
                 WHERE owner_id=$1 AND deleted_at IS NULL;
             `,[userId]
         );
-        return res;
+        //console.log(res.rows);
+        return res.rows;
     } catch(err){
         console.error("Error retrieving goal:", err);
         throw err;
@@ -92,7 +93,7 @@ export async function getGoal(goalId){
                 WHERE goal_id=$1 AND deleted_at IS NULL;
             `
         );
-        return res;
+        return res.rows;
     } catch(err){
         console.error("Error retrieving goal:", err);
         throw err;

@@ -15,8 +15,7 @@ export async function getGoalLogsHandler(req, res) {
 
 export async function addGoalLogHandler(req, res) {
 	try {
-		const goalId = parseInt(req.params.goalId);
-		const { amount, note } = req.body;
+		const { goalId,amount, note } = req.body;
 		
 		if (!goalId || Number.isNaN(goalId)) {
 			return res.status(400).json({ message: "Invalid goalId" });
@@ -28,6 +27,6 @@ export async function addGoalLogHandler(req, res) {
 		const log = await addSavingLog(goalId, parseFloat(amount), note);
 		return res.json({ data: log });
 	} catch (err) {
-		return res.status(500).json({ message: "Failed to add saving log" });
+		return res.status(500).json({ message: `Failed to add saving log. ${err.message}` });
 	}
 }

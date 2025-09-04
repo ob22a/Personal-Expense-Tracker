@@ -29,7 +29,7 @@ export const createUserGoal = async (req,res)=>{
     try{
         const ownerId = req.user.id;
         const {name,totalAmount,freq,goalDeadline} = req.body;
-        const newGoal = await createGoal(ownerId,name,totalAmount,freq,goalDeadline);
+        const newGoal = await createGoal(ownerId,name,totalAmount,freq.toLowerCase(),goalDeadline);
         res.status(201).json({message:"Goal created successfully",goal:newGoal});
     } catch(err){
         res.status(500).json({error:"Internal server error"});
@@ -40,13 +40,14 @@ export const updateUserGoal = async (req,res)=>{
     try{
         const goalId = req.params.id;
         const {name,totalAmount,freq,goalDeadline} = req.body;
-        const updatedGoal = await updateGoal(goalId,name,totalAmount,freq,goalDeadline);
+        const updatedGoal = await updateGoal(goalId,name,totalAmount,freq.toLowerCase(),goalDeadline);
         if(updatedGoal){
             res.status(200).json({message:"Goal updated successfully",goal:updatedGoal});
         } else{
             res.status(404).json({error:"Goal not found"});
         }
     } catch(err){
+        console.error("Error while updating user goal")
         res.status(500).json({error:"Internal server error"});
     }
 }
