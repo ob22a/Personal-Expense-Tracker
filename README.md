@@ -29,7 +29,7 @@ A minimal personal finance tracker with goals, transactions, reports, and saving
 │  └─ transactionController.js
 ├─ middleware/
 │  ├─ authMiddleware.js   # AuthN/AuthZ, sets req.user
-│  └─ validateInput.js    # (optional) validation helpers
+│  └─ pageMiddleware.js   
 ├─ models/                # DB access
 │  ├─ db.js               # pg Pool
 │  ├─ goalLogModel.js
