@@ -24,6 +24,9 @@ A minimal personal finance tracker with goals, transactions, reports, and saving
 ```
 .
 ├─ controllers/           # Route handlers (business logic)
+│  ├─ accessControllers.js
+│  ├─ authControllers.js
+│  ├─ goalController.js
 │  ├─ goalLogController.js
 │  ├─ reportsController.js
 │  └─ transactionController.js
@@ -36,6 +39,7 @@ A minimal personal finance tracker with goals, transactions, reports, and saving
 │  ├─ goalModel.js
 │  ├─ reportsModel.js
 │  └─ transactionModel.js
+│  └─ userModel.js
 ├─ public/                # Static assets
 │  ├─ js/
 │  │  ├─ auth.js
@@ -44,12 +48,17 @@ A minimal personal finance tracker with goals, transactions, reports, and saving
 │  │  ├─ homeEl.js
 │  │  ├─ reports.js
 │  │  └─ transaction.js
+│  │  └─ util.js
+│  │  └─ verification.js
+│  │  └─ verificationEl.js
 │  └─ styles/
 │     ├─ base.css
+│     ├─ validation.css
 │     └─ home.css
 ├─ routes/
-│  ├─ goalLogRoutes.js
-│  ├─ reportsRoutes.js
+│  ├─ goalRoutes.js
+│  ├─ accessRoutes.js
+│  ├─ userRoutes.js
 │  └─ transactionRoutes.js
 ├─ views/
 │  ├─ home.ejs
