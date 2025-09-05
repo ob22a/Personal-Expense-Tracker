@@ -31,8 +31,8 @@ A minimal personal finance tracker with goals, transactions, reports, and saving
 │  ├─ reportsController.js
 │  └─ transactionController.js
 ├─ middleware/
-│  ├─ authMiddleware.js   # AuthN/AuthZ, sets req.user
-│  └─ pageMiddleware.js   
+│  ├─ authMiddleware.js   # checks for access token and its validity
+│  └─ pageMiddleware.js   # checks for refresh token and its validity 
 ├─ models/                # DB access
 │  ├─ db.js               # pg Pool
 │  ├─ goalLogModel.js
