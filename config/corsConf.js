@@ -1,4 +1,4 @@
-const validSources = [`http://localhost:${process.env.PORT || 3000}`];
+const validSources = [`http://localhost:${process.env.PORT || 3000}`,'https://personal-expense-tracker-i0k9.onrender.com/'];
 
 const corsOptions = {
     origin: function(origin,callback){
